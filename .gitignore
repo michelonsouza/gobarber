@@ -1,0 +1,7 @@
+# folders
+node_modules/
+.vscode/
+
+# files
+.env
+.env.production
