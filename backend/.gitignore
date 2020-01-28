@@ -1,7 +1,9 @@
 # folders
 node_modules/
 .vscode/
+tmp/uploads/*
 
 # files
 .env
 .env.production
+!tmp/uploads/.gitkeep
