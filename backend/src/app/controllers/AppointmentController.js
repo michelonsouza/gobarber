@@ -7,7 +7,7 @@ import Appointment from '../models/Appointment';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
-import Mail from '../../lib/Mail';
+import Mail, { getTextEmail } from '../../lib/Mail';
 
 class AppointmentController {
   async index(req, res) {
@@ -115,6 +115,11 @@ class AppointmentController {
           as: 'provider',
           attributes: ['name', 'email'],
         },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
       ],
     });
 
@@ -136,10 +141,27 @@ class AppointmentController {
 
     await appointment.save();
 
+    const formattedDate = format(
+      appointment.date,
+      "dd 'de' MMMM', às 'HH:mm'h'",
+      {
+        locale: pt,
+      }
+    );
+
     await Mail.sendMail({
       to: `${appointment.provider.name} <${appointment.provider.email}>`,
       subject: 'Agendamento cancelado',
-      text: 'Você tem um novo cancelamento',
+      template: 'cancelation',
+      text: getTextEmail('cancelation', {
+        ...appointment,
+        date: formattedDate,
+      }),
+      context: {
+        provider: appointment.provider.name,
+        user: appointment.user.name,
+        date: formattedDate,
+      },
     });
 
     return res.json(appointment);
