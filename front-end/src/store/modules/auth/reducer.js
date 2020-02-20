@@ -30,6 +30,13 @@ export default function auth(state = initialState, action = {}) {
         break;
       }
 
+      case types.SIGN_OUT: {
+        draft.token = null;
+        draft.signed = false;
+        draft.loading = false;
+        break;
+      }
+
       default:
     }
   });

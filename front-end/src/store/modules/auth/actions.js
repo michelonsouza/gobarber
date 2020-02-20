@@ -32,3 +32,9 @@ export function signFailure() {
     type: types.SIGN_FAILURE,
   };
 }
+
+export function signOut() {
+  return {
+    type: types.SIGN_OUT,
+  };
+}

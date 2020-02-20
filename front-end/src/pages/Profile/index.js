@@ -4,6 +4,9 @@ import { Form, Input } from '@rocketseat/unform';
 import Spinner from 'react-spinner-material';
 
 import { updateProfilerequest } from '~/store/modules/user/actions';
+import { signOut } from '~/store/modules/auth/actions';
+
+import AvatarInput from './AvatarInput';
 
 import { Container } from './styles';
 
@@ -15,9 +18,15 @@ export default function Profile() {
     dispatch(updateProfilerequest(data));
   }
 
+  function handleSignOut() {
+    dispatch(signOut());
+  }
+
   return (
     <Container>
       <Form initialData={profile} onSubmit={handleSubmit}>
+        <AvatarInput name="avatar_id" />
+
         <Input name="name" type="text" placeholder="Nome Completo" />
         <Input name="email" type="email" placeholder="Seu e-mail" />
 
@@ -44,7 +53,7 @@ export default function Profile() {
         </button>
       </Form>
 
-      <button type="button" disabled={loading}>
+      <button type="button" disabled={loading} onClick={handleSignOut}>
         Sair do GoBarber
       </button>
     </Container>
