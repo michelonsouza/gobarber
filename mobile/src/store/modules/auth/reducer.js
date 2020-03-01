@@ -1,0 +1,43 @@
+import { produce } from 'immer';
+
+import * as types from '~/store/types';
+
+const initalState = {
+  token: null,
+  signed: false,
+  loading: false,
+};
+
+export default function auth(state = initalState, action = {}) {
+  return produce(state, draft => {
+    switch (action.type) {
+      case types.SING_IN_REQUEST:
+      case types.SIGN_UP_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+
+      case types.SIGN_IN_SUCCESS: {
+        draft.token = action.payload.token;
+        draft.signed = true;
+        draft.loading = false;
+        break;
+      }
+
+      case types.SIGN_FAILURE:
+      case types.SIGN_UP_SUCCESS: {
+        draft.loading = false;
+        break;
+      }
+
+      case types.SIGN_OUT: {
+        draft.token = null;
+        draft.signed = false;
+        draft.loading = false;
+        break;
+      }
+
+      default:
+    }
+  });
+}
