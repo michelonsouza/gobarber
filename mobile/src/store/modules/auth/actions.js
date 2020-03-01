@@ -35,6 +35,6 @@ export function signFailure() {
 
 export function signOut() {
   return {
-    types: types.SIGN_OUT,
+    type: types.SIGN_OUT,
   };
 }

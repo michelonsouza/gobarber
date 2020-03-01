@@ -15,8 +15,8 @@ export default function module(state = initalState, action = {}) {
         break;
       }
 
-      case types.SIGN_UP_SUCCESS: {
-        draft.user = action.payload.user;
+      case types.SIGN_IN_SUCCESS: {
+        draft.profile = action.payload.user;
         break;
       }
 

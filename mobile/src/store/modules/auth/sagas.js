@@ -3,7 +3,6 @@ import { Alert } from 'react-native';
 
 import * as types from '~/store/types';
 import api from '~/services/api';
-import { navigate } from '~/services/navigation';
 import { signFailure, signInSuccess, signUpSuccess } from './actions';
 
 export function* signIn({ payload }) {
@@ -27,7 +26,6 @@ export function* signIn({ payload }) {
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
-    // navigate('Dashboard');
   } catch (error) {
     yield put(signFailure());
     Alert.alert('Error', 'E-mail ou senha inválidos');
@@ -45,8 +43,9 @@ export function* signUp({ payload }) {
     });
 
     yield put(signUpSuccess());
-    navigate('SignIn');
+    Alert.alert('Sucesso', 'Conta criada com sucesso, acesse sua nova conta');
   } catch (error) {
+    console.tron.log('error:', error);
     yield put(signFailure());
     Alert.alert('Error', 'Falha no cadastro, verifique seus dados');
   }
@@ -64,13 +63,8 @@ export function setToken({ payload }) {
   }
 }
 
-export function signOut() {
-  navigate('SingIn');
-}
-
 export default all([
   takeLatest(types.SING_IN_REQUEST, signIn),
   takeLatest(types.SIGN_UP_REQUEST, signUp),
-  takeLatest(types.SIGN_OUT, signOut),
   takeLatest('persist/REHYDRATE', setToken),
 ]);
