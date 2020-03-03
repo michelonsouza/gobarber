@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Dashboard, Profile } from '~/screens';
+import New from './New';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -31,6 +32,17 @@ export default function App() {
           title: 'Agendamentos',
           tabBarIcon: ({ color }) => (
             <Icon name="event" color={color} size={20} />
+          ),
+        }}
+      />
+      <Screen
+        name="New"
+        component={New}
+        options={{
+          title: 'Agendar',
+          tabBarVisible: false,
+          tabBarIcon: ({ color }) => (
+            <Icon name="add-circle-outline" color={color} size={20} />
           ),
         }}
       />

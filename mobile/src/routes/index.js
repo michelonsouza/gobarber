@@ -19,9 +19,9 @@ export default function Routes() {
   return (
     <NavigationContainer>
       {!signed ? (
-        <StackNavigator>
-          <Screen name="SignIn" component={SignIn} options={options} />
-          <Screen name="SignUp" component={SignUp} options={options} />
+        <StackNavigator screenOptions={options}>
+          <Screen name="SignIn" component={SignIn} />
+          <Screen name="SignUp" component={SignUp} />
         </StackNavigator>
       ) : (
         <App />
