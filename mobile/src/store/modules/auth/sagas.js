@@ -8,7 +8,6 @@ import { signFailure, signInSuccess, signUpSuccess } from './actions';
 export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
-    console.tron.log('payload:', payload);
 
     const { data: response } = yield call(api.post, '/sessions', {
       email,
@@ -45,7 +44,6 @@ export function* signUp({ payload }) {
     yield put(signUpSuccess());
     Alert.alert('Sucesso', 'Conta criada com sucesso, acesse sua nova conta');
   } catch (error) {
-    console.tron.log('error:', error);
     yield put(signFailure());
     Alert.alert('Error', 'Falha no cadastro, verifique seus dados');
   }

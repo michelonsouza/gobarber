@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import { Alert } from 'react-native';
 
 import api from '~/services/api';
-import { Background, Appointments } from '~/components';
+import { Background, Appointment } from '~/components';
 
 import { Container, Title, List } from './styles';
 
 export default function Dashboard() {
   const [appointments, setAppointments] = useState([]);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     async function loadAppointments() {
@@ -17,7 +19,7 @@ export default function Dashboard() {
     }
 
     loadAppointments();
-  }, []);
+  }, [isFocused]);
 
   async function handleCancel(id) {
     try {
@@ -47,7 +49,7 @@ export default function Dashboard() {
           data={appointments}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <Appointments onCancel={() => handleCancel(item.id)} data={item} />
+            <Appointment onCancel={() => handleCancel(item.id)} data={item} />
           )}
         />
       </Container>

@@ -14,15 +14,15 @@ export default function Appointent({ data, onCancel }) {
       addSuffix: true,
     });
   }, [data.date]);
-
   return (
     <Container past={data.past}>
       <Left>
         <Avatar
           source={{
-            uri: data.provider.avatar.url
-              ? data.provider.avatar.url
-              : `https://api.adorable.io/avatar/50/${data.provider.name}.png`,
+            uri:
+              data.provider.avatar && data.provider.avatar.url
+                ? data.provider.avatar.url
+                : `https://api.adorable.io/avatar/50/${data.provider.name}.png`,
           }}
         />
 

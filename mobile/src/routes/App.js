@@ -39,6 +39,7 @@ export default function App() {
         name="New"
         component={New}
         options={{
+          unmountOnBlur: true,
           title: 'Agendar',
           tabBarVisible: false,
           tabBarIcon: ({ color }) => (

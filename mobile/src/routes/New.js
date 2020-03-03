@@ -8,7 +8,7 @@ import { SelectProvider, SelectDateTime, Confirm } from '~/screens';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function AppointmentRoutes() {
+export default function New() {
   const navigation = useNavigation();
 
   return (
@@ -51,7 +51,7 @@ export default function AppointmentRoutes() {
         name="Confirm"
         component={Confirm}
         options={{
-          title: 'Confirme o agendamento',
+          title: 'Confirmar agendamento',
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => navigation.navigate('SelectDateTime')}>
