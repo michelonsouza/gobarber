@@ -12,6 +12,7 @@ import 'express-async-errors';
 import routes from './routes';
 import sentryConfig from './config/sentry';
 import errorMiddleware from './app/middlewares/error';
+import limit from './app/middlewares/limit';
 
 class App {
   constructor() {
@@ -35,6 +36,10 @@ class App {
       '/files',
       express.static(resolve(__dirname, '..', 'tmp', 'uploads'))
     );
+
+    if (process.env.NODE_ENV !== 'development') {
+      this.server.use(limit);
+    }
   }
 
   routes() {
